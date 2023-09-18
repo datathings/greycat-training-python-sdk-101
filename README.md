@@ -11,21 +11,17 @@ This introductory training will guide you through the basics of the GreyCat Pyth
 
 ### GreyCat setup
 
-- GreyCat runtime:
-  - Linux or Mac (x86, arm):
-    ```bash
-    curl -fsSL https://get.greycat.io/install.sh | bash
-    ```
-  - Windows (x86, arm):
-    ```bash
-    iwr https://get.greycat.io/install.ps1 -useb | iex
-    ```
+- GreyCat runtime: https://get.greycat.io/
 - Python SDK: 
-  ```bash
-  IFS=/ read GC_PY_MAJOR GC_PY_MINOR <<< "$(curl https://get.greycat.io/files/sdk/python/testing/latest)"
-  python -m pip install "https://get.greycat.io/files/sdk/python/testing/${GC_PY_MAJOR}/greycat-${GC_PY_MINOR}-py3-none-any.whl"
-  ```
-- Other versions can be found at https://get.greycat.io/
+  - For the impatients:
+    ```bash
+    python -m pip install https://get.greycat.io/files/sdk/python/testing/greycat-latest-py3-none-any.whl
+    ```
+  - For picking a specific version, necessary for requirements to not fail with every greycat update (as the latest wheel changes, its checksum with it):
+    ```bash
+    python -m pip install https://get.greycat.io/files/sdk/python/testing/6.1/greycat-6.1.29+testing-py3-none-any.whl
+    ```
+    As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/testing/
 
 ## GreyCat server application
 
