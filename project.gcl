@@ -1,0 +1,43 @@
+// Imports
+use io;
+
+// Model
+var data: nodeList<int>?;
+
+// Main entrypoint
+fn main() {
+  if (data == null) {
+    init();
+  }
+}
+
+// Model initialization
+fn init() {
+  data = nodeList<int>::new();
+  for (var i = 0; i < 10; i++)  {
+    data.add(i);
+  }
+}
+
+// Endpoints
+
+@expose
+fn helloWorld() {
+  println("Hello, World!");
+}
+
+@expose
+fn getData(): Array<int> {
+  var res = Array<int>::new(data!!.size());
+  for (index, value in data?) {
+    res[index] = value;
+  }
+  return res;
+}
+
+@expose
+fn greet(firstName: String, lastName: String): String {
+  var greeting = "Hello, ${firstName} ${lastName}!";
+  println(greeting);
+  return greeting;
+}
