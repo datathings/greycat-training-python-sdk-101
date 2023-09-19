@@ -41,7 +41,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 ### Hello, World!
 
 - Providing an endpoint is as simple as annotating any function with `@expose`:
-  ```ts
+  ```gcl
   @expose
   fn helloWorld() {
     println("Hello, World!");
@@ -56,7 +56,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 ### Getting data
 
 - Endpoints may yield results, for instance the following returns the dataset as an array:
-  ```ts
+  ```gcl
   @expose
   fn getData(): Array<int> {
     var res = Array<int>::new(data!!.size());
@@ -87,7 +87,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 ### Sending data
 
 - Conversely, GreyCat endpoints may also accept any number of parameters:
-  ```ts
+  ```gcl
   @expose
   fn greet(firstName: String, lastName: String): String {
     var greeting = "Hello, ${firstName} ${lastName}!";
