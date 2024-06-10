@@ -14,16 +14,11 @@ In some operating systems python executable is exposed as `python3` and others `
 ### GreyCat setup
 
 - GreyCat runtime: https://get.greycat.io/
-- Python SDK: 
-  - For the impatients:
-    ```bash
-    python3 -m pip install https://get.greycat.io/files/sdk/python/stable/latest
-    ```
-  - For picking a specific version, necessary for requirements to not fail with every greycat update (as the latest wheel changes, its checksum with it):
-    ```bash
-    python3 -m pip install https://get.greycat.io/files/sdk/python/stable/6.10/greycat-6.10.8+stable-py3-none-any.whl
-    ```
-    As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/stable/
+- Python SDK:
+  ```bash
+  python3 -m pip install https://get.greycat.io/files/sdk/python/stable/6.10/greycat-6.10.8+stable-py3-none-any.whl
+  ```
+  As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/stable/
 
 ## GreyCat server application
 
