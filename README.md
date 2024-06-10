@@ -17,13 +17,13 @@ In some operating systems python executable is exposed as `python3` and others `
 - Python SDK: 
   - For the impatients:
     ```bash
-    python3 -m pip install https://get.greycat.io/files/sdk/python/testing/greycat-latest-py3-none-any.whl
+    python3 -m pip install https://get.greycat.io/files/sdk/python/stable/latest
     ```
   - For picking a specific version, necessary for requirements to not fail with every greycat update (as the latest wheel changes, its checksum with it):
     ```bash
-    python3 -m pip install https://get.greycat.io/files/sdk/python/testing/6.1/greycat-6.1.32+testing-py3-none-any.whl
+    python3 -m pip install https://get.greycat.io/files/sdk/python/stable/6.10/greycat-6.10.8+stable-py3-none-any.whl
     ```
-    As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/testing/
+    As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/stable/
 
 ## GreyCat server application
 
@@ -49,9 +49,15 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
     println("Hello, World!");
   }
   ```
+- To be able to call the endpoint as-is from Python, you will first want to generate the binding call, *e.g.* with `python` as your target directory:
+  ```bash
+  greycat codegen --target=python python
+  ```
 - Then you can call the endpoint in Python with the following code, considering the helloWorld function is stored in `project.gcl`:
   ```py
-  greycat.call("project::helloWorld")
+  from python.greycat.project_lib import project_lib
+  
+  project_lib.project.helloWorld()
   ```
 - Expectedly, this call results in a greeting printed on GreyCat server logging stack.
 
@@ -68,9 +74,9 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
     return res;
   }
   ```
-- Expectedly, in Python data can be easily gathered with:
+- After a codegen, in Python data can be easily gathered with:
   ```py
-  data = greycat.call("project::getData")
+  data = project_lib.project.getData()
   ```
 - GreyCat integers, as they are stored on 64 bits, are inherently smaller than Python integers; the SDK does not hide that:
   ```py
@@ -99,7 +105,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   ```
 - In Python, the call method of the GreyCat class accepts a second optional parameter, which is a list of the parameters to be send to the GreyCat endpoint:
   ```py
-  greeting: str = greycat.call("project::greet", ["John", "Doe"])
+  greeting: str = project_lib.project.greet("John", "Doe")
   print(greeting)
   ```
 - This code will greet John Doe both on GreyCat server and Python client sides.

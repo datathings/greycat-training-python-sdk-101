@@ -1,4 +1,5 @@
-/gcdata/
-/**/__pycache__/
+gcdata
+python/greycat/std.py
+**/__pycache__
 
-/project.gcp
+project.gcp
