@@ -13,7 +13,7 @@ In some operating systems python executable is exposed as `python3` and others `
 
 ### GreyCat setup
 
-- GreyCat runtime: https://get.greycat.io/
+- GreyCat `stable` runtime: https://get.greycat.io/
 - Python SDK:
   ```bash
   python3 -m pip install https://get.greycat.io/files/sdk/python/stable/6.10/greycat-6.10.8+stable-py3-none-any.whl
@@ -54,7 +54,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   
   project_lib.project.helloWorld()
   ```
-- Expectedly, this call results in a greeting printed on GreyCat server logging stack.
+- Expectedly, this call results in a greeting printed on GreyCat server logging stack; the code can be tested with `python -m src.hello_world`.
 
 ### Getting data
 
@@ -86,6 +86,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   print(f"# {py_data}")
   # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   ```
+- This code can be tested with `python -m src.get_data`.
 
 ### Sending data
 
@@ -103,4 +104,4 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   greeting: str = project_lib.project.greet("John", "Doe")
   print(greeting)
   ```
-- This code will greet John Doe both on GreyCat server and Python client sides.
+- This code will greet John Doe both on GreyCat server and Python client sides; it can be tested with `python -m src.greet`
