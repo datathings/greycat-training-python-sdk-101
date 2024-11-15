@@ -16,7 +16,7 @@ In some operating systems python executable is exposed as `python3` and others `
 - GreyCat `stable` runtime: https://get.greycat.io/
 - Python SDK:
   ```bash
-  python -m pip install https://get.greycat.io/files/sdk/python/stable/6.10/greycat-6.10.18+stable-py3-none-any.whl
+  python -m pip install https://get.greycat.io/files/sdk/python/stable/$(curl -s https://get.greycat.io/files/sdk/python/stable/latest | sed 's#/#/greycat-#')-py3-none-any.whl
   ```
   As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/python/stable/
 
