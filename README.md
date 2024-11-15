@@ -9,7 +9,7 @@ This introductory training will guide you through the basics of the GreyCat Pyth
 - Python >= 3.8
 - pip
 
-In some operating systems python executable is exposed as `python3` and others `python`. Please adapt the examples below according to your system.
+In some operating systems Python executable is exposed as `python3` and others `python`. Please adapt the examples below according to your system.
 
 ### GreyCat setup
 
@@ -18,6 +18,13 @@ In some operating systems python executable is exposed as `python3` and others `
   ```bash
   python -m pip install https://get.greycat.io/files/sdk/python/stable/$(curl -s https://get.greycat.io/files/sdk/python/stable/latest | sed 's#/#/greycat-#')-py3-none-any.whl
   ```
+
+### Clone repository
+
+```bash
+git clone https://github.com/datathings/greycat-training-python-sdk-101.git
+cd greycat-training-python-sdk-101/
+```
 
 ## GreyCat server application
 
@@ -39,8 +46,8 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - Providing an endpoint is as simple as annotating any function with `@expose`:
   ```gcl
   @expose
-  fn helloWorld() {
-    println("Hello, World!");
+  fn helloWorld(): String {
+    return "Hello, World!";
   }
   ```
 - To be able to call the endpoint as-is from Python, you will first want to generate the binding call, *e.g.* with `python` as your target directory:
@@ -53,11 +60,11 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   
   project_lib.project.helloWorld()
   ```
-- Expectedly, this call results in a greeting printed on GreyCat server logging stack; the code can be tested with `python -m src.hello_world`.
+- Expectedly, this call results in a greeting printed on Python client logging stack; the code can be tested with `python -m src.hello_world`.
 
 ### Getting data
 
-- Endpoints may yield results, for instance the following returns the dataset as an array:
+- Endpoints may access stored data, for instance the following returns the whole dataset as an array:
   ```gcl
   @expose
   fn getData(): Array<int> {

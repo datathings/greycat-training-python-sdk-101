@@ -22,8 +22,8 @@ fn init() {
 // Endpoints
 
 @expose
-fn helloWorld() {
-  println("Hello, World!");
+fn helloWorld(): String {
+  return "Hello, World!";
 }
 
 @expose
