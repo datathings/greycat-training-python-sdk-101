@@ -4,6 +4,11 @@ use io;
 // Model
 var data: nodeList<int>?;
 
+type Person {
+  firstName: String;
+  lastName: String;
+}
+
 // Main entrypoint
 fn main() {
   if (data == null) {
@@ -14,7 +19,7 @@ fn main() {
 // Model initialization
 fn init() {
   data = nodeList<int>::new();
-  for (var i = 0; i < 10; i++)  {
+  for (var i = 0; i < 10; i++) {
     data.add(i);
   }
 }
@@ -36,8 +41,11 @@ fn getData(): Array<int> {
 }
 
 @expose
-fn greet(firstName: String, lastName: String): String {
-  var greeting = "Hello, ${firstName} ${lastName}!";
-  println(greeting);
-  return greeting;
+fn greet(firstName: String, lastName: String): Person {
+  var person = Person {
+    firstName: firstName,
+    lastName: lastName,
+  };
+  println("Hello, ${firstName} ${lastName}!");
+  return person;
 }

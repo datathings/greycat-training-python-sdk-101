@@ -34,11 +34,17 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   ```bash
   greycat serve --user=1
   ```
+- To be able to access endpoints and types from Python, you will first want to generate the binding call, *e.g.* with `python` as your target directory:
+  ```bash
+  greycat codegen --target=python python
+  ```
+  This will generate a `python/greycat/project_lib.py` source file you can then import in your application.
 - In Python, the following code instantiates a client to the GreyCat server:
   ```py
   from greycat import *
+  from python.greycat.project_lib import project_lib
 
-  greycat: GreyCat = GreyCat("http://localhost:8080")
+  greycat: GreyCat = GreyCat("http://localhost:8080", libraries=[project_lib()])
   ```
 
 ### Hello, World!
@@ -50,14 +56,8 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
     return "Hello, World!";
   }
   ```
-- To be able to call the endpoint as-is from Python, you will first want to generate the binding call, *e.g.* with `python` as your target directory:
-  ```bash
-  greycat codegen --target=python python
-  ```
 - Then you can call the endpoint in Python with the following code, considering the helloWorld function is stored in `project.gcl`:
   ```py
-  from python.greycat.project_lib import project_lib
-  
   project_lib.project.helloWorld()
   ```
 - Expectedly, this call results in a greeting printed on Python client logging stack; the code can be tested with `python -m src.hello_world`.
@@ -94,20 +94,28 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   ```
 - This code can be tested with `python -m src.get_data`.
 
-### Sending data
+### Sending data and dealing with custom types
 
 - Conversely, GreyCat endpoints may also accept any number of parameters:
   ```gcl
+  type Person {
+    firstName: String;
+    lastName: String;
+  }
+
   @expose
-  fn greet(firstName: String, lastName: String): String {
-    var greeting = "Hello, ${firstName} ${lastName}!";
-    println(greeting);
-    return greeting;
+  fn greet(firstName: String, lastName: String): Person {
+    var person = Person {
+      firstName: firstName,
+      lastName: lastName,
+    };
+    println("Hello, ${firstName} ${lastName}!");
+    return person;
   }
   ```
-- In Python, the call method of the GreyCat class accepts a second optional parameter, which is a list of the parameters to be send to the GreyCat endpoint:
+- We instantiate and return here a custom type Person: this type is accessible in Python after a codegen, with getters and setters for its attributes; additionally, generated functions accept the same parameters as the exposed functions they bind to:
   ```py
-  greeting: str = project_lib.project.greet("John", "Doe")
-  print(greeting)
+  person: project_lib.project.Person = project_lib.project.greet("John", "Doe")
+  print(f"Hello, {person.firstName()} {person.lastName()}!")
   ```
 - This code will greet John Doe both on GreyCat server and Python client sides; it can be tested with `python -m src.greet`
